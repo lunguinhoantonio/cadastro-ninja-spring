@@ -10,6 +10,6 @@ public class Controller {
 
     @GetMapping("/")
     public String welcome() {
-        return "Olá Mundo!";
+        return "<span style='color: blue; background-color: black;'><strong>Olá Mundo!</strong></span>";
     }
 }
