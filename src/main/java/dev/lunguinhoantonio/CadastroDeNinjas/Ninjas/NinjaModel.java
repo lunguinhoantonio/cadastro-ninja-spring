@@ -2,9 +2,13 @@ package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
 
 import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_cadastro")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +19,4 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
-
-    public NinjaModel() {
-    }
-
-    public NinjaModel(String nome, String email, int idade) {
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
-    }
 }
