@@ -31,5 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+### Insert by myself ###
 data/
 .env
+src/main/resources/db/migrations
