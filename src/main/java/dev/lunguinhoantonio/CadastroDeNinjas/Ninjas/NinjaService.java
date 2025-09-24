@@ -1,6 +1,7 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -26,5 +27,9 @@ public class NinjaService {
 
     public NinjaModel criarNinja(@RequestBody NinjaModel ninjaModel) {
         return ninjaRepository.save(ninjaModel);
+    }
+
+    public void deletarNinjaPorId(Long id) {
+        ninjaRepository.deleteById(id);
     }
 }
