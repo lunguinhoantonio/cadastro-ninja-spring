@@ -1,10 +1,9 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ninjas")
@@ -12,7 +11,7 @@ public class NinjaController {
 
     private final NinjaService ninjaService;
 
-    public NinjaController(NinjaService ninjaService) {
+    public NinjaController(NinjaService ninjaService, NinjaRepository ninjaRepository) {
         this.ninjaService = ninjaService;
     }
 
@@ -48,6 +47,13 @@ public class NinjaController {
         if (ninja != null) {
             return ResponseEntity.ok(ninja);
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID " + id + " não encontrado!");
+    }
+
+    @PatchMapping("/alterar/{id}")
+    public ResponseEntity<?> partialUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
+        NinjaDTO ninja = ninjaService.atualizarNinjaPorIdPatch(id, fields);
+        if (ninja != null) return ResponseEntity.ok(ninja);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID " + id + " não encontrado!");
     }
 
