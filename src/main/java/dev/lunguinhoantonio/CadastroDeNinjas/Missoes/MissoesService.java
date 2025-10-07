@@ -1,6 +1,10 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Missoes;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,6 +45,33 @@ public class MissoesService {
             return missoesMapper.map(missaoSalva);
         }
         return null;
+    }
+
+    public MissoesDTO atualizarMissaoPorIDPatch(Long id, Map<String, Object> fields) {
+        MissoesModel missoesModel = findOne(id);
+        merge(fields, missoesModel);
+        missoesModel = missoesRepository.save(missoesModel);
+        return missoesMapper.map(missoesModel);
+    }
+
+    private void merge(Map<String, Object> fields, MissoesModel missoesModel) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        MissoesModel missoesModelConvert = objectMapper.convertValue(fields, MissoesModel.class);
+        fields.forEach((nomeAtributo, valorAtributo) -> {
+            Field field = ReflectionUtils.findField(MissoesModel.class, nomeAtributo);
+            if (field != null) {
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, missoesModel, valorAtributo);
+                Object newValue = ReflectionUtils.getField(field, missoesModelConvert);
+                ReflectionUtils.setField(field, missoesModel, newValue);
+                field.setAccessible(false);
+            }
+        });
+    }
+
+    private MissoesModel findOne(Long id) {
+        Optional<MissoesModel> ninja = missoesRepository.findById(id);
+        return ninja.orElse(null);
     }
 
     public void deletarPorID(Long id) {
