@@ -11,7 +11,7 @@ public class NinjaController {
 
     private final NinjaService ninjaService;
 
-    public NinjaController(NinjaService ninjaService, NinjaRepository ninjaRepository) {
+    public NinjaController(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
     }
 
