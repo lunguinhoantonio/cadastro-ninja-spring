@@ -173,12 +173,12 @@
     <form th:action="@{/missao/ui/salvar}" th:object="${missoes}" method="post">
         <div>
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" required />
+            <input type="text" id="nome" th:field="*{nome}" autocomplete="off" required />
         </div>
 
         <div>
             <label for="dificuldade">Dificuldade:</label>
-            <input type="text" id="dificuldade" th:field="*{dificuldade}" required />
+            <input type="text" id="dificuldade" th:field="*{dificuldade}" autocomplete="off" required />
         </div>
 
         <button type="submit">Cadastrar Missão</button>
