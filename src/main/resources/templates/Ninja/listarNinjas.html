@@ -223,7 +223,8 @@
 </head>
 <body>
 <h1>Lista de ninjas</h1>
-<a class="btn-adicionar" th:href="@{/ninjas/ui/adicionar}">Adicionar Novo Ninja</a>
+<a class="btn-adicionar" th:href="@{/ninjas/ui/criar}">Adicionar Novo Ninja</a>
+<a class="btn-adicionar" th:href="@{/missao/ui/listar}">Listar missões</a>
 <table>
     <thead>
     <tr>
@@ -245,13 +246,16 @@
         <td th:text="${ninja.rank}"></td>
         <td>
             <span th:if="${ninja.missoes}"> Nome: <span th:text="${ninja.missoes.nome}"></span>, Dificuldade: <span th:text="${ninja.missoes.dificuldade}"></span></span>
-            <span th:if="${ninja.missoes == null}">Sem missões cadastrado para o ninja</span>
+            <span th:if="${ninja.missoes == null}">Sem missões cadastradas para o ninja</span>
         </td>
         <td>
             <div class="acoes-buttons">
                 <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
                 <a th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Alterar</a>
-                <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
+                <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar este ninja?')">
+                    Deletar
+                </a>
             </div>
         </td>
     </tr>

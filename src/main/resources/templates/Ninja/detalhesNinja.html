@@ -16,13 +16,13 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 20px;
     }
 
     h1 {
       text-align: center;
       color: white;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       font-size: 2.5em;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
       letter-spacing: 2px;
@@ -190,22 +190,23 @@
   <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
   <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
 
-  <h3>Missões:</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Dificuldade</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="missao: ${ninja.missoes}">
-      <td th:text="${missao.nome}"></td>
-      <td th:text="${missao.dificuldade}"></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<a href="/ninjas/ui/listar">Voltar para a lista de ninjas</a>
+  <h3 th:if="${ninja.missoes != null}">Missões:</h3>
+  <h3 th:unless="${ninja.missoes != null}">Sem missões cadastradas para o ninja</h3>
+    <table th:if="${ninja.missoes != null}">
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Dificuldade</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="missao: ${ninja.missoes}">
+        <td th:text="${missao.nome}"></td>
+        <td th:text="${missao.dificuldade}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<a href="javascript:history.back()">Voltar</a>
 </body>
 </html>
