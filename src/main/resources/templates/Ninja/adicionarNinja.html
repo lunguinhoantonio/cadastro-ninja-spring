@@ -176,19 +176,19 @@
   <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
   <form th:action="@{/ninjas/ui/salvar}" th:object="${ninja}" method="post">
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}" required />
+    <input type="text" id="nome" th:field="*{nome}" autocomplete="off" required />
 
     <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" required />
+    <input type="email" id="email" th:field="*{email}" autocomplete="off" required />
 
     <label for="imgUrl">URL da Imagem:</label>
-    <input type="text" id="imgUrl" th:field="*{imgUrl}" required />
+    <input type="text" id="imgUrl" th:field="*{imgUrl}" autocomplete="off" required />
 
     <label for="idade">Idade:</label>
-    <input type="number" id="idade" th:field="*{idade}" required />
+    <input type="number" id="idade" th:field="*{idade}" autocomplete="off" min="0" required />
 
     <label for="rank">Rank:</label>
-    <input type="text" id="rank" th:field="*{rank}" />
+    <input type="text" id="rank" th:field="*{rank}" autocomplete="off" />
 
     <button type="submit">Cadastrar Ninja</button>
   </form>
