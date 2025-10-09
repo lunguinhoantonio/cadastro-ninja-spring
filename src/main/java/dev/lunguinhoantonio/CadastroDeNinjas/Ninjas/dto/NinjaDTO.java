@@ -1,5 +1,5 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
-import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.MissoesModel;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.model.MissoesModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

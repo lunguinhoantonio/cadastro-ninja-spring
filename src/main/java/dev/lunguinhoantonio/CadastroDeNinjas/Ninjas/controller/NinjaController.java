@@ -1,4 +1,6 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.controller;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.service.NinjaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.model;
 
-import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.MissoesModel;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.model.MissoesModel;
 import jakarta.persistence.*;
 import lombok.*;
 

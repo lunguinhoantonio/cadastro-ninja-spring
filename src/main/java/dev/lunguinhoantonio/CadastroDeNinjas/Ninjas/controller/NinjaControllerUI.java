@@ -1,9 +1,10 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.controller;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.service.NinjaService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 

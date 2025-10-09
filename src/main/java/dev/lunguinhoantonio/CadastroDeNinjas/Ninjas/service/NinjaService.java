@@ -1,6 +1,10 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
-import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.MissoesModel;
-import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.MissoesRepository;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.service;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.model.MissoesModel;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.repository.MissoesRepository;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.mapper.NinjaMapper;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.model.NinjaModel;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;

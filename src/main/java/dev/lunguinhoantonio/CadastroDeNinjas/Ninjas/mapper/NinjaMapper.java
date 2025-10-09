@@ -1,5 +1,7 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
+package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.mapper;
 
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.model.NinjaModel;
+import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,14 +1,12 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Missoes;
-import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.NinjaDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+package dev.lunguinhoantonio.CadastroDeNinjas.Missoes.controller;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.dto.MissoesDTO;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.service.MissoesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/missao/ui")

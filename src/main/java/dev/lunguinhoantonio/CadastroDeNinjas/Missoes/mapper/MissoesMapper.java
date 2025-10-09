@@ -1,5 +1,7 @@
-package dev.lunguinhoantonio.CadastroDeNinjas.Missoes;
+package dev.lunguinhoantonio.CadastroDeNinjas.Missoes.mapper;
 
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.model.MissoesModel;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.dto.MissoesDTO;
 import org.springframework.stereotype.Component;
 
 @Component
