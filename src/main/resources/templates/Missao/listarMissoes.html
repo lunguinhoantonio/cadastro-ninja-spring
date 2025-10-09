@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html">
-    <title>Tabela de Ninjas</title>
+    <title>Lista de Missões</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -23,16 +23,36 @@
         h1 {
             text-align: center;
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             letter-spacing: 2px;
         }
 
+        .btn-adicionar {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 30px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-adicionar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+        }
+
         table {
             width: 100%;
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 0 auto 30px;
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -76,24 +96,6 @@
             vertical-align: middle;
         }
 
-        tbody td img {
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        tbody td img:hover {
-            transform: scale(1.1);
-        }
-
-        tbody td:first-child {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Container dos botões */
         .acoes-buttons {
             display: flex;
             gap: 8px;
@@ -113,69 +115,53 @@
             text-align: center;
         }
 
-        /* Botão Ver Detalhes */
         .acoes-buttons a:nth-child(1) {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .acoes-buttons a:nth-child(1):hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Botão Alterar */
-        .acoes-buttons a:nth-child(2) {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
         }
 
-        .acoes-buttons a:nth-child(2):hover {
+        .acoes-buttons a:nth-child(1):hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
         }
 
-        /* Botão Deletar */
-        .acoes-buttons a:nth-child(3) {
+        .acoes-buttons a:nth-child(2) {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: white;
             box-shadow: 0 4px 12px rgba(250, 112, 154, 0.3);
         }
 
-        .acoes-buttons a:nth-child(3):hover {
+        .acoes-buttons a:nth-child(2):hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(250, 112, 154, 0.4);
         }
 
-        .btn-adicionar {
-            display: block;
-            width: fit-content;
-            margin: 0 auto 30px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1em;
-            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .btn-adicionar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
-        }
-
-        /* Badge para missões */
         span {
             padding: 4px 0;
             color: #555;
         }
 
-        /* Responsividade */
+        body > a:last-child {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body > a:last-child:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
         @media (max-width: 1200px) {
             table {
                 font-size: 0.9em;
@@ -190,6 +176,14 @@
             h1 {
                 font-size: 1.8em;
                 margin-bottom: 20px;
+            }
+
+            .btn-adicionar,
+            body > a:last-child {
+                width: calc(100% - 20px);
+                margin-left: 10px;
+                margin-right: 10px;
+                text-align: center;
             }
 
             thead tr th {
@@ -212,50 +206,46 @@
                 font-size: 0.8em;
                 padding: 6px 12px;
             }
-
-            .btn-adicionar {
-                width: calc(100% - 20px);
-                margin: 0 10px 20px;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
-<h1>Lista de ninjas</h1>
-<a class="btn-adicionar" th:href="@{/ninjas/ui/adicionar}">Adicionar Novo Ninja</a>
+<h1>Lista de Missões</h1>
+<a class="btn-adicionar" th:href="@{/missao/ui/criar}">Adicionar Missão</a>
 <table>
     <thead>
     <tr>
-        <th>Imagem</th>
         <th>Nome</th>
-        <th>Idade</th>
-        <th>Email</th>
-        <th>Rank</th>
-        <th>Missões</th>
+        <th>Dificuldade</th>
+        <th>Ninjas</th>
         <th>Ações</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="ninja: ${ninjas}">
-        <td> <img th:src="${ninja.imgUrl}" alt="imagem exemplo" width="100px" height="100px"></td>
-        <td th:text="${ninja.nome}"></td>
-        <td th:text="${ninja.idade}"></td>
-        <td th:text="${ninja.email}"></td>
-        <td th:text="${ninja.rank}"></td>
+    <tr th:each="missoes: ${missoes}">
+        <td th:text="${missoes.nome}"></td>
+        <td th:text="${missoes.dificuldade}"></td>
         <td>
-            <span th:if="${ninja.missoes}"> Nome: <span th:text="${ninja.missoes.nome}"></span>, Dificuldade: <span th:text="${ninja.missoes.dificuldade}"></span></span>
-            <span th:if="${ninja.missoes == null}">Sem missões cadastrado para o ninja</span>
+                <span th:if="${missoes.ninjas}">
+                    <span th:each="ninja,iterStat:${missoes.ninjas}">
+                        <span th:text="${ninja.nome}"></span>
+                        <span th:if="${!iterStat.last}">,</span>
+                    </span>
+                </span>
+            <span th:if="${missoes.ninjas.isEmpty()}">Nenhum ninja atribuído a essa missão</span>
         </td>
         <td>
             <div class="acoes-buttons">
-                <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
-                <a th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Alterar</a>
-                <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
+                <a th:href="@{/missao/ui/alterar/{id}(id=${missoes.id})}">Alterar</a>
+                <a th:href="@{/missao/ui/deletar/{id}(id=${missoes.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar esta missão?')">
+                    Deletar
+                </a>
             </div>
         </td>
     </tr>
     </tbody>
 </table>
+<a th:href="@{/ninjas/ui/listar}">Voltar para Tela Inicial</a>
 </body>
 </html>

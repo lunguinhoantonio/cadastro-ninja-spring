@@ -34,10 +34,10 @@
 
     .form-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       background: white;
       border-radius: 12px;
-      padding: 40px;
+      padding: 24px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
 
@@ -55,14 +55,15 @@
     form {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      justify-content: space-around;
+      gap: 12px;
     }
 
     label {
       font-weight: 600;
       color: #764ba2;
       font-size: 0.95em;
-      margin-bottom: 8px;
+      margin-top: 16px;
       display: block;
     }
 
@@ -106,8 +107,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-      margin-top: 10px;
       font-family: 'Inter', sans-serif;
+      margin-top: 12px;
     }
 
     button[type="submit"]:hover {
@@ -122,7 +123,7 @@
     .form-container > a {
       display: block;
       text-align: center;
-      margin-top: 25px;
+      margin-top: 24px;
       padding: 12px 24px;
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       color: white;
@@ -191,7 +192,7 @@
 
     <button type="submit">Cadastrar Ninja</button>
   </form>
-  <a th:href="@{/ninjas/ui/listar}">Voltar para a lista de ninjas</a>
+  <a href="javascript:history.back()">Voltar</a>
 </div>
 </body>
 </html>

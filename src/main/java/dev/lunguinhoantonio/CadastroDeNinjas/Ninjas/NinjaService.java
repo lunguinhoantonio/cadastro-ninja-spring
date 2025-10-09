@@ -33,6 +33,7 @@ public class NinjaService {
     }
 
     public NinjaDTO criarNinja(NinjaDTO ninjaDTO) {
+        if (ninjaRepository.existsByEmail(ninjaDTO.getEmail())) return null;
         NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninja = ninjaRepository.save(ninja);
         return ninjaMapper.map(ninja);

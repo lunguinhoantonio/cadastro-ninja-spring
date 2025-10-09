@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <title>Tabela de Ninjas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        thead tr th {
+            padding: 20px 15px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8f9ff;
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody td {
+            padding: 18px 15px;
+            color: #333;
+            font-size: 0.95em;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tbody td img {
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        tbody td img:hover {
+            transform: scale(1.1);
+        }
+
+        tbody td:first-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container dos botões */
+        .acoes-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .acoes-buttons a {
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Botão Ver Detalhes */
+        .acoes-buttons a:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .acoes-buttons a:nth-child(1):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Botão Alterar */
+        .acoes-buttons a:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+        }
+
+        .acoes-buttons a:nth-child(2):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+        }
+
+        /* Botão Deletar */
+        .acoes-buttons a:nth-child(3) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(250, 112, 154, 0.3);
+        }
+
+        .acoes-buttons a:nth-child(3):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(250, 112, 154, 0.4);
+        }
+
+        .btn-adicionar {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 30px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-adicionar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+        }
+
+        /* Badge para missões */
+        span {
+            padding: 4px 0;
+            color: #555;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            table {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            thead tr th {
+                padding: 15px 10px;
+                font-size: 0.8em;
+            }
+
+            tbody td {
+                padding: 12px 10px;
+                font-size: 0.85em;
+            }
+
+            .acoes-buttons {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .acoes-buttons a {
+                width: 100%;
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+
+            .btn-adicionar {
+                width: calc(100% - 20px);
+                margin: 0 10px 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de ninjas</h1>
+<a class="btn-adicionar" th:href="@{/ninjas/ui/criar}">Adicionar Novo Ninja</a>
+<a class="btn-adicionar" th:href="@{/missao/ui/listar}">Listar missões</a>
+<table>
+    <thead>
+    <tr>
+        <th>Imagem</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Email</th>
+        <th>Rank</th>
+        <th>Missões</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ninja: ${ninjas}">
+        <td> <img th:src="${ninja.imgUrl}" alt="imagem exemplo" width="100px" height="100px"></td>
+        <td th:text="${ninja.nome}"></td>
+        <td th:text="${ninja.idade}"></td>
+        <td th:text="${ninja.email}"></td>
+        <td th:text="${ninja.rank}"></td>
+        <td>
+            <span th:if="${ninja.missoes}"> Nome: <span th:text="${ninja.missoes.nome}"></span>, Dificuldade: <span th:text="${ninja.missoes.dificuldade}"></span></span>
+            <span th:if="${ninja.missoes == null}">Sem missões cadastradas para o ninja</span>
+        </td>
+        <td>
+            <div class="acoes-buttons">
+                <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
+                <a th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Alterar</a>
+                <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}"
+                   onclick="return confirm('Tem certeza que deseja deletar este ninja?')">
+                    Deletar
+                </a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

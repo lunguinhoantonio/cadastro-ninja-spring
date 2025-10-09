@@ -1,4 +1,5 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class NinjaControllerUI {
     public String listarNinjas(Model model) {
         List<NinjaDTO> ninjas = ninjaService.listarNinjas();
         model.addAttribute("ninjas", ninjas);
-        return "listarNinjas";
+        return "Ninja/listarNinjas";
     }
 
     @GetMapping("/deletar/{id}")
@@ -33,24 +34,41 @@ public class NinjaControllerUI {
         NinjaDTO ninja = ninjaService.listarNinjasPorID(id);
         if (ninja !=null) {
             model.addAttribute("ninja", ninja);
-            return "detalhesNinja";
+            return "Ninja/detalhesNinja";
         } else {
             model.addAttribute("mensagem", "Ninja não encontrado");
-            return "listarNinjas";
+            return "Ninja/listarNinjas";
         }
     }
 
-    @GetMapping("/adicionar")
+    @GetMapping("/criar")
     public String mostrarFormularioAdicionarNinja(Model model) {
         model.addAttribute("ninja", new NinjaDTO());
-        return "adicionarNinja";
+        return "Ninja/adicionarNinja";
     }
 
     @PostMapping("/salvar")
-    public String salvarNinja(@ModelAttribute NinjaDTO ninja, RedirectAttributes redirectAttributes) {
-        ninjaService.criarNinja(ninja);
-        redirectAttributes.addFlashAttribute("mensagem", "Ninja cadastrado com sucesso!");
-        return "redirect:/ninjas/ui/listar";
-    }
+    public String salvarNinja(@ModelAttribute NinjaDTO ninja, Model model) {
+        try {
+            NinjaDTO ninjaSalvo = ninjaService.criarNinja(ninja);
 
+            if (ninjaSalvo == null) {
+                model.addAttribute("mensagem", "Erro: Este email já está cadastrado!");
+                model.addAttribute("ninja", ninja);
+                return "Ninja/adicionarNinja";
+            }
+
+            model.addAttribute("mensagem", "Ninja cadastrado com sucesso!");
+            return "redirect:/ninjas/ui/listar";
+
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("mensagem", "Erro: Este email já está cadastrado!");
+            model.addAttribute("ninja", ninja);
+            return "Ninja/adicionarNinja";
+        } catch (Exception e) {
+            model.addAttribute("mensagem", "Erro ao cadastrar ninja: " + e.getMessage());
+            model.addAttribute("ninja", ninja);
+            return "Ninja/adicionarNinja";
+        }
+    }
 }
