@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>Alterar Ninja</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+    }
+
+    body > a {
+      display: block;
+      width: fit-content;
+      margin-bottom: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+    }
+
+    body > a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .mensagem {
+      padding: 15px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+      border-left: 4px solid #667eea;
+      color: #667eea;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .mensagem-erro {
+      padding: 15px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a5215 100%);
+      border-left: 4px solid #ff6b6b;
+      color: #ff6b6b;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #764ba2;
+      font-size: 0.95em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="hidden"],
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95em;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #f8f9ff;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    input[type="number"]:hover,
+    select:hover {
+      border-color: #667eea;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    .info-section {
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #764ba2;
+      margin-bottom: 10px;
+    }
+
+    .info-section h3 {
+      color: #764ba2;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+    }
+
+    .missao-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .missao-item {
+      background: white;
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 3px solid #667eea;
+    }
+
+    .missao-item strong {
+      color: #667eea;
+      margin-right: 5px;
+    }
+
+    .empty-message {
+      color: #888;
+      font-style: italic;
+      font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+      }
+
+      body > a {
+        width: calc(100% - 20px);
+        text-align: center;
+      }
+
+      .form-container {
+        padding: 25px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      select {
+        padding: 10px 14px;
+        font-size: 0.9em;
+      }
+
+      button[type="submit"] {
+        padding: 12px 20px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1>Alterar Ninja</h1>
+<a href="javascript:history.back()">Voltar</a>
+<div class="form-container">
+  <div th:if="${mensagem}"
+       th:class="${mensagem.startsWith('Erro') ? 'mensagem-erro' : 'mensagem'}"
+       th:text="${mensagem}">
+  </div>
+
+  <form th:action="@{/ninjas/ui/atualizar}" th:object="${ninja}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" th:field="*{nome}" autocomplete="off" required />
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" th:field="*{email}" autocomplete="off" required />
+    </div>
+
+    <div>
+      <label for="imgUrl">URL da Imagem:</label>
+      <input type="text" id="imgUrl" th:field="*{imgUrl}" autocomplete="off" required />
+    </div>
+
+    <div>
+      <label for="idade">Idade:</label>
+      <input type="number" id="idade" th:field="*{idade}" autocomplete="off" required />
+    </div>
+
+    <div>
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" th:field="*{rank}" autocomplete="off" required />
+    </div>
+
+    <div>
+      <label for="missoes">Missão:</label>
+      <select id="missoes" th:field="*{missoes.id}">
+        <option value="">Sem missão</option>
+        <option th:each="missao : ${todasMissoes}"
+                th:value="${missao.id}"
+                th:text="${missao.nome + ' - ' + missao.dificuldade}"
+                th:selected="${ninja.missoes != null and ninja.missoes.id == missao.id}">
+        </option>
+      </select>
+    </div>
+
+    <button type="submit">Atualizar Ninja</button>
+  </form>
+</div>
+</body>
+</html>

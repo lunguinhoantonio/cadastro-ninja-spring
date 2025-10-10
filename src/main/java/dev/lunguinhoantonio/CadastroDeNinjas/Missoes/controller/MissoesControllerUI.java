@@ -37,7 +37,7 @@ public class MissoesControllerUI {
     }
 
     @GetMapping("/alterar/{id}")
-    public String exibirFormularioAlterar(@PathVariable Long id, Model model) {
+    public String exibirFormularioAlterarMissao(@PathVariable Long id, Model model) {
         MissoesDTO missao = missoesService.listarPorID(id);
         if (missao != null) {
             model.addAttribute("missoes", missao);

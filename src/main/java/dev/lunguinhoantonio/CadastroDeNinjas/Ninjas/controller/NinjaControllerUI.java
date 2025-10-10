@@ -1,4 +1,6 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.controller;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.dto.MissoesDTO;
+import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.service.MissoesService;
 import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
 import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.service.NinjaService;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,9 +14,11 @@ import java.util.List;
 @RequestMapping("/ninjas/ui")
 public class NinjaControllerUI {
     private final NinjaService ninjaService;
+    private final MissoesService missoesService;
 
-    public NinjaControllerUI(NinjaService ninjaService) {
+    public NinjaControllerUI(NinjaService ninjaService, MissoesService missoesService) {
         this.ninjaService = ninjaService;
+        this.missoesService = missoesService;
     }
 
     @GetMapping("/listar")
@@ -33,12 +37,49 @@ public class NinjaControllerUI {
     @GetMapping("/listar/{id}")
     public String listarNinjasPorId(@PathVariable Long id, Model model) {
         NinjaDTO ninja = ninjaService.listarNinjasPorID(id);
-        if (ninja !=null) {
+        if (ninja != null) {
             model.addAttribute("ninja", ninja);
             return "Ninja/detalhesNinja";
         } else {
             model.addAttribute("mensagem", "Ninja não encontrado");
             return "Ninja/listarNinjas";
+        }
+    }
+
+    @GetMapping("/alterar/{id}")
+    public String exibirFormularioAlterarNinja(@PathVariable Long id, Model model) {
+        NinjaDTO ninjaDTO = ninjaService.listarNinjasPorID(id);
+        if (ninjaDTO != null) {
+            model.addAttribute("ninja", ninjaDTO);
+            List<MissoesDTO> todasMissoes = missoesService.listar();
+            model.addAttribute("todasMissoes", todasMissoes);
+            return "Ninja/alterarNinja";
+        }
+        model.addAttribute("mensagem", "Missão não encontrada!");
+        return "redirect:/ninjas/ui/listar";
+    }
+
+    @PostMapping("/atualizar")
+    public String atualizarNinja(@ModelAttribute NinjaDTO ninjaDTO, Model model) {
+        try {
+            NinjaDTO ninjaAtualizado = ninjaService.atualizarNinja(ninjaDTO.getId(), ninjaDTO);
+
+            if (ninjaAtualizado != null) {
+                model.addAttribute("mensagem", "Ninja atualizado com sucesso!");
+                return "redirect:/ninjas/ui/listar";
+            }
+
+            model.addAttribute("mensagem", "Erro ao atualizar ninja!");
+            return "Ninja/alterarNinja";
+
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("mensagem", "Erro: Este email já está cadastrado!");
+            model.addAttribute("ninja", ninjaDTO);
+
+            List<MissoesDTO> todasMissoes = missoesService.listar();
+            model.addAttribute("todasMissoes", todasMissoes);
+
+            return "Ninja/alterarNinja";
         }
     }
 

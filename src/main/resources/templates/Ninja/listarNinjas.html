@@ -251,7 +251,7 @@
         <td>
             <div class="acoes-buttons">
                 <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
-                <a th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Alterar</a>
+                <a th:href="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}">Alterar</a>
                 <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}"
                    onclick="return confirm('Tem certeza que deseja deletar este ninja?')">
                     Deletar
