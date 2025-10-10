@@ -52,6 +52,14 @@ public class NinjaService {
         if (ninjaExistente.isPresent()) {
             NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
             ninjaAtualizado.setId(id);
+
+            if (ninjaDTO.getMissoes() != null && ninjaDTO.getMissoes().getId() != null) {
+                Optional<MissoesModel> missao = missoesRepository.findById(ninjaDTO.getMissoes().getId());
+                ninjaAtualizado.setMissoes(missao.orElse(null));
+            } else {
+                ninjaAtualizado.setMissoes(null);
+            }
+
             NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
             return ninjaMapper.map(ninjaSalvo);
         }
