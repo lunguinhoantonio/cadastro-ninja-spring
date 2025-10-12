@@ -3,9 +3,11 @@ import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.dto.MissoesDTO;
 import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.service.MissoesService;
 import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
 import dev.lunguinhoantonio.CadastroDeNinjas.Ninjas.service.NinjaService;
+import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -90,13 +92,13 @@ public class NinjaControllerUI {
     }
 
     @PostMapping("/salvar")
-    public String salvarNinja(@ModelAttribute NinjaDTO ninja, Model model) {
+    public String salvarNinja(@Valid @ModelAttribute("ninja") NinjaDTO ninja, BindingResult result, Model model) {
+        if (result.hasErrors()) return "Ninja/adicionarNinja";
         try {
             NinjaDTO ninjaSalvo = ninjaService.criarNinja(ninja);
 
             if (ninjaSalvo == null) {
-                model.addAttribute("mensagem", "Erro: Este email já está cadastrado!");
-                model.addAttribute("ninja", ninja);
+                model.addAttribute("mensagem", "Ocorreu um erro!");
                 return "Ninja/adicionarNinja";
             }
 
@@ -104,12 +106,10 @@ public class NinjaControllerUI {
             return "redirect:/ninjas/ui/listar";
 
         } catch (DataIntegrityViolationException e) {
-            model.addAttribute("mensagem", "Erro: Este email já está cadastrado!");
-            model.addAttribute("ninja", ninja);
+            model.addAttribute("mensagem", "Ocorreu um erro!");
             return "Ninja/adicionarNinja";
         } catch (Exception e) {
             model.addAttribute("mensagem", "Erro ao cadastrar ninja: " + e.getMessage());
-            model.addAttribute("ninja", ninja);
             return "Ninja/adicionarNinja";
         }
     }

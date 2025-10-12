@@ -1,8 +1,10 @@
 package dev.lunguinhoantonio.CadastroDeNinjas.Missoes.controller;
 import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.dto.MissoesDTO;
 import dev.lunguinhoantonio.CadastroDeNinjas.Missoes.service.MissoesService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,9 +61,15 @@ public class MissoesControllerUI {
     }
 
     @PostMapping("/salvar")
-    public String salvarMissao(@ModelAttribute MissoesDTO missao, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("mensagem", "Missão cadastrada com sucesso!");
-        missoesService.criar(missao);
-        return "redirect:/missao/ui/listar";
+    public String salvarMissao(@Valid @ModelAttribute("missoes") MissoesDTO missao, BindingResult result, Model model) {
+        if (result.hasErrors()) return "Missao/adicionarMissao";
+
+        try {
+            missoesService.criar(missao);
+            return "redirect:/missao/ui/listar";
+        } catch (Exception e) {
+            model.addAttribute("mensagem", "Erro ao cadastrar missão: " + e.getMessage());
+            return "Missao/adicionarMissao";
+        }
     }
 }

@@ -190,8 +190,8 @@
   <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
   <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
 
-  <h3 th:if="${ninja.missoes != null}">Missões:</h3>
-  <h3 th:unless="${ninja.missoes != null}">Sem missões cadastradas para o ninja</h3>
+  <h3 th:if="${ninja.missoes != null}">Missão:</h3>
+  <h3 th:unless="${ninja.missoes != null}">Sem missão cadastrada para o ninja</h3>
     <table th:if="${ninja.missoes != null}">
       <thead>
       <tr>
