@@ -140,7 +140,18 @@
       box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
     }
 
-    /* Responsividade */
+    .error-message {
+      display: block;
+      color: #ff6b6b;
+      font-size: 0.85em;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    input:invalid {
+      border-color: #ff6b6b;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 20px 10px;
@@ -175,20 +186,35 @@
 <div class="form-container">
   <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
   <form th:action="@{/ninjas/ui/salvar}" th:object="${ninja}" method="post">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}" autocomplete="off" required />
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" th:field="*{nome}" autocomplete="off" required minlength="3" maxlength="100"/>
+      <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+    </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" autocomplete="off" required />
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" th:field="*{email}" autocomplete="off" required />
+      <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
+    </div>
 
-    <label for="imgUrl">URL da Imagem:</label>
-    <input type="text" id="imgUrl" th:field="*{imgUrl}" autocomplete="off" required />
+    <div>
+      <label for="imgUrl">URL da Imagem:</label>
+      <input type="text" id="imgUrl" th:field="*{imgUrl}" autocomplete="off" required />
+      <span th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="error-message"></span>
+    </div>
 
-    <label for="idade">Idade:</label>
-    <input type="number" id="idade" th:field="*{idade}" autocomplete="off" min="0" required />
+    <div>
+      <label for="idade">Idade:</label>
+      <input type="number" id="idade" th:field="*{idade}" autocomplete="off" min="1" max="120" required />
+      <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}" class="error-message"></span>
+    </div>
 
-    <label for="rank">Rank:</label>
-    <input type="text" id="rank" th:field="*{rank}" autocomplete="off" />
+    <div>
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" th:field="*{rank}" autocomplete="off" />
+      <span th:if="${#fields.hasErrors('rank')}" th:errors="*{rank}" class="error-message"></span>
+    </div>
 
     <button type="submit">Cadastrar Ninja</button>
   </form>
