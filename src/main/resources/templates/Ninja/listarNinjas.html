@@ -239,7 +239,12 @@
     </thead>
     <tbody>
     <tr th:each="ninja: ${ninjas}">
-        <td> <img th:src="${ninja.imgUrl}" alt="imagem exemplo" width="100px" height="100px"></td>
+        <td> <img th:src="${ninja.imgUrl != null and !ninja.imgUrl.isEmpty()} ? ${ninja.imgUrl} : 'src/main/resources/static/images/ninja-default.jpg'"
+                  th:alt="'Foto de ' + ${ninja.nome}"
+                  onerror="this.onerror=null; src='src/main/resources/static/images/ninja-default.jpg';"
+                  width="100px"
+                  height="100px"
+                  loading="lazy"></td>
         <td th:text="${ninja.nome}"></td>
         <td th:text="${ninja.idade}"></td>
         <td th:text="${ninja.email}"></td>
