@@ -105,6 +105,7 @@ public class NinjaController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com o ID " + id + " não encontrado!");
     }
+
     @Operation(
         summary = "Atualizar ninja parcialmente",
         description = "Atualiza campos específicos de um ninja existente através do ID",
