@@ -239,9 +239,9 @@
     </thead>
     <tbody>
     <tr th:each="ninja: ${ninjas}">
-        <td> <img th:src="${ninja.imgUrl != null and !ninja.imgUrl.isEmpty()} ? ${ninja.imgUrl} : 'src/main/resources/static/images/ninja-default.jpg'"
+        <td> <img th:src="${ninja.imgUrl != null and !ninja.imgUrl.isEmpty()} ? ${ninja.imgUrl} : '/images/ninja-default.jpg'"
                   th:alt="'Foto de ' + ${ninja.nome}"
-                  onerror="this.onerror=null; src='src/main/resources/static/images/ninja-default.jpg';"
+                  onerror="this.onerror=null; this.src='/images/ninja-default.jpg';"
                   width="100px"
                   height="100px"
                   loading="lazy"></td>
