@@ -1,6 +1,6 @@
 # Cadastro de Ninjas — Spring Boot
 
-API RESTful completa para gerenciamento de ninjas e missões, com interface web via Thymeleaf e documentação interativa via Swagger. Desenvolvida como projeto do curso **Java10x**.
+API RESTful completa para gerenciamento de ninjas e missões, com interface web via Thymeleaf e documentação interativa via Swagger.
 
 ---
 
@@ -18,14 +18,14 @@ A aplicação oferece **duas camadas de acesso**:
 
 | Tecnologia | Versão | Descrição |
 |---|---|---|
-| Java | 17 | Linguagem principal |
+| Java | 21 | Linguagem principal |
 | Spring Boot | 3.4.5 | Framework principal |
 | Spring Web | — | Exposição dos endpoints REST |
 | Spring Data JPA | — | Camada de persistência e ORM |
 | Spring Validation | — | Validação de dados com Bean Validation |
 | Thymeleaf | — | Template engine para interface web |
-| H2 Database | — | Banco de dados em memória |
-| Flyway | — | Gerenciamento de migrações do banco |
+| MySQL | 8.0+ | Banco de dados relacional |
+| Flyway | 9.22.3 | Gerenciamento de migrações do banco |
 | Lombok | — | Redução de boilerplate |
 | SpringDoc OpenAPI (Swagger) | 2.8.13 | Documentação interativa da API |
 | Maven | — | Build e gerenciamento de dependências |
@@ -37,7 +37,7 @@ A aplicação oferece **duas camadas de acesso**:
 ```
 src/
 └── main/
-    ├── java/dev/lunguinhoantonio/CadastroDeNinjas/
+    ├── /dev/lunguinhoantonio/CadastroDeNinjas/
     │   ├── CadastroDeNinjasApplication.java
     │   ├── Ninjas/
     │   │   ├── controller/
@@ -59,6 +59,7 @@ src/
     │       └── service/MissoesService.java
     └── resources/
         ├── application.properties
+        ├── db/migrations/                     # Migrations do Flyway
         ├── static/images/ninja-default.jpg
         └── templates/
             ├── Ninja/
@@ -86,7 +87,7 @@ src/
 | idade | int | Obrigatório, 1–120 |
 | email | String | Obrigatório, único, formato válido |
 | imgUrl | String | Obrigatório, até 255 caracteres |
-| rank | String | 4–50 caracteres |
+| nivel | String | 4–50 caracteres |
 | missoes_id | Long | FK → tb_missoes |
 
 ### Missão (`tb_missoes`)
@@ -148,16 +149,28 @@ Missão (1) ──────────── (N) Ninja
 
 ### Pré-requisitos
 
-- Java 17+
-- Maven 3.8+
+- Java 21+
+- Maven 3.9+
+- MySQL 8.0+
+
+### Configuração do Banco de Dados
+
+Crie um banco e um usuário no MySQL antes de rodar a aplicação:
+
+```sql
+CREATE USER 'seu_usuario'@'localhost' IDENTIFIED BY 'sua_senha';
+CREATE DATABASE nome_do_banco;
+GRANT ALL PRIVILEGES ON nome_do_banco.* TO 'seu_usuario'@'localhost';
+FLUSH PRIVILEGES;
+```
 
 ### Variáveis de Ambiente
 
 | Variável | Descrição | Exemplo |
 |---|---|---|
-| `DATABASE_URL` | URL de conexão do H2 | `jdbc:h2:mem:ninja_db` |
-| `DATABASE_USERNAME` | Usuário do banco | `sa` |
-| `DATABASE_PASSWORD` | Senha do banco | *(vazio)* |
+| `DATABASE_URL` | URL de conexão JDBC | `jdbc:mysql://localhost:3306/seu_banco` |
+| `DATABASE_USERNAME` | Usuário do banco | `seu_usuario` |
+| `DATABASE_PASSWORD` | Senha do banco | `sua_senha` |
 | `PORT` | Porta do servidor (opcional) | `8080` |
 
 ### Executando localmente
@@ -168,15 +181,17 @@ git clone https://github.com/lunguinhoantonio/cadastro-ninja-spring.git
 cd cadastro-ninja-spring
 
 # 2. Defina as variáveis de ambiente
-export DATABASE_URL=jdbc:h2:mem:ninja_db
-export DATABASE_USERNAME=sa
-export DATABASE_PASSWORD=
+export DATABASE_URL=jdbc:mysql://localhost:3306/seu_banco
+export DATABASE_USERNAME=seu_usuario
+export DATABASE_PASSWORD=sua_senha
 
 # 3. Execute a aplicação
 ./mvnw spring-boot:run
 ```
 
 A aplicação estará disponível em: **http://localhost:8080**
+
+> 💡 **Dica:** No IntelliJ, você pode configurar as variáveis de ambiente em `Run > Edit Configurations > Environment Variables`.
 
 ---
 
@@ -185,16 +200,6 @@ A aplicação estará disponível em: **http://localhost:8080**
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
-
----
-
-## 🗃️ Console do Banco de Dados H2
-
-```
-http://localhost:8080/h2-console
-```
-
-Use as mesmas credenciais configuradas nas variáveis de ambiente.
 
 ---
 
@@ -209,10 +214,12 @@ Content-Type: application/json
   "nome": "Naruto Uzumaki",
   "idade": 17,
   "email": "naruto@konoha.com",
-  "imgUrl": "https://exemplo.com/naruto.jpg",
-  "rank": "Genin"
+  "imgUrl": "https://i.pinimg.com/736x/exemplo.jpg",
+  "nivel": "Genin"
 }
 ```
+
+> ⚠️ **Atenção:** o campo `imgUrl` deve conter um link direto para a imagem (terminando em `.jpg`, `.png`, etc.), não o link de uma página web.
 
 ### Criar uma missão
 ```http
@@ -248,4 +255,4 @@ Content-Type: application/json
 ## 👤 Autor
 
 **Antonio Lunguinho**  
-🔗 [github.com/lunguinhoantonio](https://github.com/lunguinhoantonio)
+🔗 [Link GitHub](https://github.com/lunguinhoantonio)
