@@ -184,7 +184,11 @@
 <body>
 <h1>Detalhes do ninja</h1>
 <div>
-  <img th:src="${ninja.imgUrl}" alt="Foto ${ninja.nome}" width="200px" height="200px"/>
+    <img th:src="${ninja.imgUrl != null and !ninja.imgUrl.isEmpty()} ? ${ninja.imgUrl} : '/images/ninja-default.jpg'"
+         th:alt="'Foto de ' + ${ninja.nome}"
+         onerror="this.onerror=null; this.src='/images/ninja-default.jpg';"
+         width="200px"
+         height="200px"/>
   <h2 th:text="${ninja.nome}"></h2>
   <p><strong>Email:</strong> <span th:text="${ninja.email}"></span></p>
   <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
