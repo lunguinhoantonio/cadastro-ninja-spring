@@ -28,7 +28,7 @@ public class NinjaModel {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "rank")
+    @Column(name = "nivel")
     private String rank;
 
     @ManyToOne
